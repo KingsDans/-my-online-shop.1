@@ -1,7 +1,10 @@
 node_modules/
 .env
 data/
-private_uploads/*
-!private_uploads/receipts/.gitkeep
-!private_uploads/digital/.gitkeep
+private_uploads/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
 .DS_Store
+
+persist/

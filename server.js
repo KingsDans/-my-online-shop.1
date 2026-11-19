@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const SQLiteSessionStore = require("connect-sqlite3")(session);
 const SQLiteStore = require("better-sqlite3");
 const bcrypt = require("bcryptjs");
 const Database = require("better-sqlite3");
@@ -14,8 +15,9 @@ const rateLimit = require("express-rate-limit");
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
-const DATA = path.join(ROOT, "data");
-const UPLOADS = path.join(ROOT, "private_uploads");
+const PERSIST_ROOT = process.env.DATA_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH || ROOT;
+const DATA = path.join(PERSIST_ROOT, "data");
+const UPLOADS = path.join(PERSIST_ROOT, "private_uploads");
 fs.mkdirSync(DATA, {recursive:true});
 fs.mkdirSync(path.join(UPLOADS,"receipts"), {recursive:true});
 fs.mkdirSync(path.join(UPLOADS,"digital"), {recursive:true});
@@ -88,7 +90,9 @@ app.use(helmet({contentSecurityPolicy:{directives:{
 app.use(express.json({limit:"1mb"}));
 app.use(express.urlencoded({extended:true,limit:"1mb"}));
 app.use(session({
+ store: new SQLiteSessionStore({ db: "sessions.sqlite", dir: DATA, table: "sessions" }),
  secret:process.env.SESSION_SECRET,resave:false,saveUninitialized:false,
+ name:"shop.sid",
  cookie:{httpOnly:true,sameSite:"lax",secure:process.env.NODE_ENV==="production",maxAge:8*60*60*1000}
 }));
 app.use(express.static(path.join(ROOT,"public")));
@@ -106,6 +110,7 @@ const receiptUpload=multer({storage:receiptStorage,limits:{fileSize:5*1024*1024}
 const digitalUpload=multer({storage:digitalStorage,limits:{fileSize:50*1024*1024},fileFilter:(r,f,cb)=>cb(null,["application/pdf","application/zip","application/octet-stream","image/jpeg","image/png"].includes(f.mimetype))});
 const admin=(req,res,next)=>req.session.admin?next():res.status(401).json({error:"Admin login required."});
 const publicSettings=()=>Object.fromEntries(["shop_name","tagline","logo_url","shipping_fee","cod_enabled","gcash_name","gcash_number","maya_name","maya_number","contact_email"].map(k=>[k,setting(k,defaults[k]||"")]));
+app.get("/health",(req,res)=>res.status(200).json({ok:true}));
 app.get("/api/store",(req,res)=>res.json({settings:publicSettings(),products:db.prepare("SELECT id,name,description,price,type,image_url,stock FROM products WHERE active=1 ORDER BY id DESC").all()}));
 app.post("/api/orders",receiptUpload.single("receipt"),(req,res)=>{
  try{
@@ -213,4 +218,4 @@ app.get("/api/download/:code/:productId",(req,res)=>{
  res.download(path.join(UPLOADS,"digital",path.basename(p.digital_file)));
 });
 app.use((err,req,res,next)=>{console.error(err);res.status(400).json({error:err.message||"Request failed."})});
-app.listen(PORT,()=>console.log(`Shop running on port ${PORT}`));
+app.listen(PORT,"0.0.0.0",()=>console.log(`Shop running on port ${PORT}`));

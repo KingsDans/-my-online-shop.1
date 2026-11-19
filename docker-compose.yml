@@ -4,7 +4,8 @@ services:
     ports:
       - "3000:3000"
     env_file: .env
+    environment:
+      DATA_DIR: /app/persist
     volumes:
-      - ./data:/app/data
-      - ./private_uploads:/app/private_uploads
+      - ./persist:/app/persist
     restart: unless-stopped
