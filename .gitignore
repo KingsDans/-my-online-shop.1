@@ -1,0 +1,7 @@
+node_modules/
+.env
+data/
+private_uploads/*
+!private_uploads/receipts/.gitkeep
+!private_uploads/digital/.gitkeep
+.DS_Store
