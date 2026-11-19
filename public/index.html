@@ -1,14 +1,62 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your Brand — Online Shop</title><link rel="stylesheet" href="/styles.css"></head><body>
-<header><a class="brand" href="#" id="brand">YOUR BRAND</a><nav><a href="#shop">Shop</a><a href="#about">Info</a><button class="textbtn" id="bagBtn">Bag (<span id="bagCount">0</span>)</button><button class="textbtn" id="adminBtn">Admin</button></nav></header>
-<main><section class="hero"><div><small>THE ONLINE STORE</small><h1 id="heroTitle">STYLE.<br>QUALITY.<br>VALUE.</h1><p id="tagline">Discover products worth having.</p><a class="button" href="#shop">Explore shop</a></div><div class="heroimg" id="heroimg"><span>YOUR CAMPAIGN IMAGE</span></div></section>
-<div class="benefits"><span>✳ DIGITAL + PHYSICAL</span><span>✳ SIMPLE CHECKOUT</span><span>✳ DELIVERY OPTIONS</span></div>
-<section class="section" id="shop"><div class="sectionhead"><div><small>THE COLLECTION</small><h2>Shop products</h2></div><div class="filters"><button class="active" data-filter="All">All</button><button data-filter="Digital">Digital</button><button data-filter="Physical">Physical</button></div></div><div class="grid" id="products"></div></section>
-<section class="section lookup"><small>ORDER UPDATES</small><h2>Track your order</h2><div class="track"><input id="trackCode" placeholder="Order code"><input id="trackEmail" type="email" placeholder="Email used at checkout"><button class="button" id="trackBtn">Check order</button></div><div id="trackResult"></div></section>
-</main><footer id="about"><div><b id="footBrand">YOUR BRAND</b><p id="footTag">A curated online store.</p></div><p>Shipping and payment details are provided at checkout.<br><span id="contact"></span></p></footer>
-<div class="modal" id="cartModal"><div class="dialog"><div class="modalhead"><h2>Your bag</h2><button class="x" data-close="cartModal">×</button></div><div id="cartLines"></div><div id="checkout"></div></div></div>
-<div class="modal" id="adminModal"><div class="dialog wide"><div class="modalhead"><h2>Store administration</h2><button class="x" data-close="adminModal">×</button></div><div id="adminLogin"><p>Private store-owner access.</p><input id="adminEmail" type="email" placeholder="Admin email"><input id="adminPassword" type="password" placeholder="Password"><button class="button" id="loginBtn">Sign in</button><p class="error" id="loginError"></p></div><div id="adminPanel" hidden><div class="tabs"><button data-tab="branding" class="active">Branding & fees</button><button data-tab="productsTab">Products</button><button data-tab="ordersTab">Orders</button><button data-tab="securityTab">Security</button></div>
-<section class="tab active" id="branding"><h3>Store branding</h3><div class="fields"><label>Shop name<input id="sName"></label><label>Tagline<input id="sTag"></label><label>Logo / hero image URL<input id="sLogo"></label><label>Shipping fee (PHP)<input id="sShip" type="number"></label><label>COD enabled<select id="sCod"><option value="1">Yes</option><option value="0">No</option></select></label><label>Contact email<input id="sContact"></label></div><h3>GCash payment instructions</h3><div class="fields"><label>Account name<input id="gName"></label><label>GCash number<input id="gNumber"></label></div><h3>Maya payment instructions</h3><div class="fields"><label>Account name<input id="mName"></label><label>Maya number<input id="mNumber"></label></div><button class="button" id="saveSettings">Save settings</button></section>
-<section class="tab" id="productsTab"><h3>Add product</h3><div class="fields"><label>Name<input id="pName"></label><label>Price (PHP)<input id="pPrice" type="number" min="0"></label><label>Type<select id="pType"><option>Physical</option><option>Digital</option></select></label><label>Stock<input id="pStock" type="number" min="0" value="0"></label><label>Image URL<input id="pImage"></label><label>Description<input id="pDesc"></label></div><button class="button" id="addProduct">Add product</button><div id="productAdminList"></div></section>
-<section class="tab" id="ordersTab"><h3>Customer orders</h3><div id="ordersList"></div></section>
-<section class="tab" id="securityTab"><h3>Change admin password</h3><div class="fields"><label>Current password<input id="oldPass" type="password"></label><label>New password (12+ characters)<input id="newPass" type="password"></label></div><button class="button" id="changePass">Change password</button><button class="outline" id="logoutBtn">Sign out</button></section></div></div></div>
-<script src="/app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="A considered collection of digital and everyday essentials.">
+  <title>Your Brand — Considered Goods</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="announcement"><span>THOUGHTFULLY SELECTED · MADE TO BE KEPT</span><span class="announcement-note">A little more considered, every day.</span></div>
+  <header class="site-header">
+    <a class="brand-lockup" href="#top" aria-label="Back to top"><span class="brand-mark">Y.</span><span class="brand-name" id="brand">YOUR BRAND</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#shop">Shop all</a><a href="#story">Our approach</a><a href="#order-help">Order care</a>
+    </nav>
+    <div class="header-actions"><button class="admin-link" id="adminBtn" type="button">Account</button><button class="bag-button" id="bagBtn" type="button"><span>Bag</span><span class="bag-count" id="bagCount">0</span></button><button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu">☰</button></div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> THE ART OF CHOOSING WELL</p>
+        <h1 id="heroTitle">The good things.<br><em>Made meaningful.</em></h1>
+        <p class="hero-description" id="tagline">A thoughtful edit of useful things, digital finds and everyday favourites.</p>
+        <div class="hero-actions"><a class="button button-dark" href="#shop">Explore the collection <span>↗</span></a><a class="quiet-link" href="#story">Discover our approach</a></div>
+        <div class="hero-footnote"><span>01 / A MORE CONSIDERED WAY TO SHOP</span><span>EST. WITH INTENTION</span></div>
+      </div>
+      <div class="hero-visual" id="heroimg" aria-label="Store campaign image">
+        <div class="hero-image-fallback"><span class="hero-image-kicker">THE EVERYDAY EDIT</span><span class="hero-image-serif">Objects<br>with purpose.</span><span class="hero-image-caption">A collection for living beautifully.</span></div>
+        <div class="hero-stamp">CURATED<br>WITH CARE</div>
+      </div>
+    </section>
+
+    <section class="value-strip" aria-label="Store highlights"><div><span class="value-number">01</span><span>Digital & physical finds</span></div><div><span class="value-number">02</span><span>Simple, secure ordering</span></div><div><span class="value-number">03</span><span>Personal order care</span></div></section>
+
+    <section class="collection section-wrap" id="shop">
+      <div class="section-intro"><div><p class="eyebrow">THE COLLECTION / 2026</p><h2>Find your <em>favourite.</em></h2></div><p class="section-note">Useful things. Lovely details.<br>Chosen to make everyday feel special.</p></div>
+      <div class="shop-toolbar"><div class="filter-group" role="group" aria-label="Filter products"><button class="filter-button active" data-filter="All" type="button">Everything</button><button class="filter-button" data-filter="Physical" type="button">Objects</button><button class="filter-button" data-filter="Digital" type="button">Digital</button></div><label class="search-box"><span aria-hidden="true">⌕</span><input id="productSearch" type="search" placeholder="Find something…" aria-label="Search products"></label></div>
+      <div class="product-grid" id="products" aria-live="polite"></div>
+      <div class="collection-bottom"><span>THE COLLECTION IS ALWAYS EVOLVING</span><span>SELECTED WITH INTENTION&nbsp; ✳</span></div>
+    </section>
+
+    <section class="story-band" id="story"><div class="story-image" aria-hidden="true"><div class="story-image-inner"><span>LESS, BUT<br><em>BETTER.</em></span></div></div><div class="story-copy"><p class="eyebrow">A NOTE ON OUR APPROACH</p><h2>Good design.<br><em>Good decisions.</em></h2><p>We believe the things we choose should bring a little more ease, beauty and purpose to everyday life. Explore a considered mix of physical pieces and digital essentials, selected to be useful long after the first impression.</p><a href="#shop" class="text-arrow">Explore what we love <span>↗</span></a></div></section>
+
+    <section class="order-care section-wrap" id="order-help"><div class="order-care-heading"><p class="eyebrow">HERE WHEN YOU NEED US</p><h2>Your order,<br><em>in good hands.</em></h2><p>Already placed an order? Enter your details below to see its latest status.</p></div><div class="tracking-panel"><div class="tracking-title"><span>ORDER LOOKUP</span><span>02 / CARE</span></div><label>Order reference<input id="trackCode" placeholder="e.g. SHOP-AB12CD34" autocomplete="off"></label><label>Email used at checkout<input id="trackEmail" type="email" placeholder="you@example.com" autocomplete="email"></label><button class="button button-dark" id="trackBtn" type="button">Find my order <span>→</span></button><div id="trackResult" aria-live="polite"></div></div></section>
+  </main>
+
+  <footer class="site-footer" id="about"><div class="footer-top"><div><a class="brand-lockup footer-brand" href="#top"><span class="brand-mark">Y.</span><span class="brand-name" id="footBrand">YOUR BRAND</span></a><p id="footTag">A considered collection for everyday living.</p></div><div class="footer-note"><span>MADE TO FEEL PERSONAL.</span><span>CHOSEN TO LAST.</span></div></div><div class="footer-bottom"><span>© <span id="year"></span> <span id="footerName">YOUR BRAND</span>. ALL RIGHTS RESERVED.</span><span>QUESTIONS? <a id="contact" href="mailto:hello@example.com">GET IN TOUCH</a></span><a href="#top">BACK TO TOP ↑</a></div></footer>
+
+  <div class="modal" id="cartModal" aria-modal="true" role="dialog" aria-labelledby="cartTitle"><div class="dialog cart-dialog"><div class="modal-head"><div><p class="eyebrow">YOUR SELECTION</p><h2 id="cartTitle">The bag.</h2></div><button class="close-button" data-close="cartModal" aria-label="Close bag">×</button></div><div id="cartLines"></div><div id="checkout"></div></div></div>
+
+  <div class="modal" id="adminModal" aria-modal="true" role="dialog" aria-labelledby="adminTitle"><div class="dialog admin-dialog"><div class="modal-head"><div><p class="eyebrow">PRIVATE STORE ACCESS</p><h2 id="adminTitle">Studio admin.</h2></div><button class="close-button" data-close="adminModal" aria-label="Close administration">×</button></div><div id="adminLogin" class="admin-login"><p>Sign in to manage your store, products and customer orders.</p><label>Email address<input id="adminEmail" type="email" placeholder="Owner email" autocomplete="username"></label><label>Password<input id="adminPassword" type="password" placeholder="Your password" autocomplete="current-password"></label><button class="button button-dark" id="loginBtn" type="button">Sign in securely <span>→</span></button><p class="error" id="loginError" role="alert"></p></div><div id="adminPanel" hidden><div class="admin-tabs tabs"><button data-tab="branding" class="active">Brand & fees</button><button data-tab="productsTab">Products</button><button data-tab="ordersTab">Orders</button><button data-tab="securityTab">Security</button></div>
+      <section class="tab active" id="branding"><h3>Store identity</h3><div class="fields"><label>Shop name<input id="sName"></label><label>Tagline<input id="sTag"></label><label>Logo / hero image URL<input id="sLogo" placeholder="https://…"></label><label>Shipping fee (PHP)<input id="sShip" type="number"></label><label>Cash on Delivery<select id="sCod"><option value="1">Enabled</option><option value="0">Disabled</option></select></label><label>Contact email<input id="sContact" type="email"></label></div><h3>GCash details</h3><div class="fields"><label>Account name<input id="gName"></label><label>GCash number<input id="gNumber"></label></div><h3>Maya details</h3><div class="fields"><label>Account name<input id="mName"></label><label>Maya number<input id="mNumber"></label></div><button class="button button-dark" id="saveSettings" type="button">Save store settings →</button></section>
+      <section class="tab" id="productsTab"><h3>Add a product</h3><div class="fields"><label>Product name<input id="pName"></label><label>Price (PHP)<input id="pPrice" type="number" min="0"></label><label>Product type<select id="pType"><option>Physical</option><option>Digital</option></select></label><label>Stock quantity<input id="pStock" type="number" min="0" value="0"></label><label>Image URL<input id="pImage"></label><label>Description<input id="pDesc"></label></div><button class="button button-dark" id="addProduct" type="button">Add product →</button><div id="productAdminList"></div></section>
+      <section class="tab" id="ordersTab"><h3>Customer orders</h3><div id="ordersList"></div></section>
+      <section class="tab" id="securityTab"><h3>Account security</h3><div class="fields"><label>Current password<input id="oldPass" type="password"></label><label>New password (12+ characters)<input id="newPass" type="password"></label></div><button class="button button-dark" id="changePass" type="button">Update password</button> <button class="button button-light" id="logoutBtn" type="button">Sign out</button></section>
+    </div></div></div>
+  <script src="/app.js"></script>
+</body>
+</html>
